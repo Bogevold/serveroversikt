@@ -1,0 +1,27 @@
+@startuml
+
+entity "Application" as Application {
+  *id : int <<PK>>
+  --
+  name : str
+  description : str?
+}
+
+entity "Server" as Server {
+  *id : int <<PK>>
+  --
+  name : str
+  location : str
+}
+
+entity "Installation" as Installation {
+  *application_id : int <<PK, FK>>
+  *server_id : int <<PK, FK>>
+  --
+  version : str
+}
+
+Application ||--o{ Installation : "has"
+Server      ||--o{ Installation : "hosts"
+
+@enduml

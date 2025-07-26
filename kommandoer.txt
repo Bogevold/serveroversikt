@@ -1,0 +1,9 @@
+# Start postgres
+docker run --name serveroversikt-pg-db -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -v $(pwd)/postgres_data:/var/lib/postgresql/data -d postgres
+
+# Rolle og database opprettet
+create role srv_sian with LOGIN PASSWORD 'passordetErHemmelig';
+create database serveroversikt owner srv_sian;
+
+# Start fastapi server
+fastapi dev main.py
